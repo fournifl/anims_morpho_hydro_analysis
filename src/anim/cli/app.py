@@ -7,9 +7,7 @@ import typer
 import yaml
 from pydantic import BaseModel
 
-from anim.cli import anim
-
-# from calib.cli import calibrate
+from anim.cli import animation
 
 app = typer.Typer(no_args_is_help=True)
 
@@ -31,6 +29,7 @@ class Waves_conventions(BaseModel):
 
 class AppConfig(BaseModel):
     app_name: str
+    cam_params_path: Path
     waves: Waves_conventions
     water_level: Path
     transects: list
@@ -75,7 +74,7 @@ def main(
 
     try:
         # Run animation creation
-        anim.main(conf)
+        animation.main(conf)
 
     except Exception as e:  # noqa: BLE001
         typer.secho(f"An error occurred: {e}", fg=typer.colors.RED)
