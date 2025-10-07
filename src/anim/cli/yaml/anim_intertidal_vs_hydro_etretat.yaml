@@ -1,0 +1,42 @@
+app_name: "anim_intertidal_vs_hydro" # anim_intertidal_vs_hydro or anim_coastline_vs_hydro
+cam_params_path: "/home/florent/Projects/Etretat/CAM1/info/cam_params_etretat_central.json"
+waves:
+  file: "/home/florent/Projects/Etretat/Wave_measurements/copernicus_model_nwshelf_reanalysis/time_series/copernicus_waves_output_closest_to_beach_Etretat_20180627_20250531.csv"
+  key_hs: "VHM0"
+  key_dir: "VMDR_SW1"
+  key_per: "VTPK"
+  key_t: "date"
+  angle_min_landward: -115
+  angle_max_landward: 50
+  convert_direction_0_360_to_m180_180: true
+  threshold_aberrant_hs: 5.0
+  threshold_aberrant_period: 20.0
+  storms_resume_file: "/home/florent/Projects/Etretat/Wave_measurements/copernicus_model_nwshelf_reanalysis/waves_analysis/storm_resume_table_etretat.csv"
+  wave_height_notable_percentile_min_threshold: 0.9
+water_level: "/home/florent/Projects/Etretat/Water_levels/shom/NIVEAUX_concat_HYCOM2D_R1000_ATL-CG_TOLOSA_R1120_NORMANDIE-200M_despiked.pk"
+transects: ["T3", "T4"]
+transects_to_plot: ["T3", "T4"]
+input_directory_a: "/home/florent/Projects/Etretat/CAM1/images/raw/"
+profile_mvt_files: [
+"/home/florent/Projects/Etretat/Etretat_central_central2/diagnostics/moving_slope/t_window_7days_sigma_5/slope_moving_window_7_days_T3_20180628_20250701.pk",
+"/home/florent/Projects/Etretat/Etretat_central_central2/diagnostics/moving_slope/t_window_7days_sigma_5/slope_moving_window_7_days_T4_20180628_20250701.pk"
+]
+output_dir: "/home/florent/Projects/Etretat/wave_conditions_vs_beach_profiles_dynamics/anims/"
+start: "2022-02-12"
+end: "2022-03-09"
+variables_to_plot:
+  cam_a_img: true
+  water_level: true
+  hs: true
+  tp: true
+  dir: true
+  beach_profile: true
+height_ratios:
+  cam_a_img: 3
+  water_level: 1
+  hs: 1
+  tp: 1
+  dir: 1
+  beach_profile: 2.5
+
+
