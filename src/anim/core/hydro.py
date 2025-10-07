@@ -26,8 +26,8 @@ def read_csv_waves(waves):
     )
 
     # remove aberrant wave period values
-    wave_data[waves.key_period][
-        wave_data[waves.key_period] > waves.threshold_aberrant_period
+    wave_data[waves.key_per][
+        wave_data[waves.key_per] > waves.threshold_aberrant_period
     ] = np.nan
 
     # compute wave thresholds
@@ -54,8 +54,8 @@ def read_csv_waves(waves):
 
     # filter by direction
     wave_data["filtered_by_direction"] = (
-        wave_data[waves.key_dir] > waves.angle_min_threshold
-    ) & (wave_data[waves.key_dir] < waves.angle_max_threshold)
+        wave_data[waves.key_dir] > waves.angle_min_landward
+    ) & (wave_data[waves.key_dir] < waves.angle_max_landward)
 
     return wave_data, thresholds
 
@@ -64,7 +64,7 @@ def get_storm_dates_in_out(wave_data, percentile_min_threshold, key_dir):
     # storm in the analysis
     indexes_in = (
         wave_data["filtered_by_direction"]
-        & wave_data[percentile_min_threshold]
+        & wave_data["p_" + str(percentile_min_threshold)]
         & ~np.isnan(wave_data[key_dir])
     )
 
@@ -88,7 +88,7 @@ def get_storm_dates_in_out(wave_data, percentile_min_threshold, key_dir):
     # Storm out of analysis
     indexes_out = (
         ~wave_data["filtered_by_direction"]
-        & wave_data[percentile_min_threshold]
+        & wave_data[f"p_{percentile_min_threshold}"]
         & ~np.isnan(wave_data[key_dir])
     )
 
